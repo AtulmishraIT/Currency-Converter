@@ -23,6 +23,7 @@ body{
     font-size: 2rem;
 }
 
+
 .container {
     background-color: #fff;
     padding: 2rem;
@@ -76,7 +77,7 @@ form input{
 
 .select-container select{
     font-size: 1rem;
-    width: auto;
+    width: 3rem;
 }
 
 .msg{
@@ -89,4 +90,21 @@ form button{
     color: #fff;
     font-size: 1.15rem;
     cursor: pointer;
+}
+
+.madeby{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.7rem;
+    margin-top: 1.5rem;
+}
+
+.madeby a{
+    text-decoration: none;
+}
+
+.madeby a:hover{
+    cursor: pointer;
+    -webkit-text-fill-color: blue;
 }
