@@ -1,15 +1,24 @@
-const BASE_URL = "https://cdn.jsdelivr.net/gh/ismartcoding/currency-api@main/latest/data.json";
 const dropdowns = document.querySelectorAll(".dropdown select");
 const btn = document.querySelector("form button");
 const fromCurr = document.querySelector(".from select");
 const toCurr = document.querySelector(".to select");
 const msg = document.querySelector(".msg");
 
+function getname(currCode) {
+    for(currName in countryName){
+        if(currName === countryList[currCode]){
+            name = countryName[currName];
+            name1 = name.split(",")
+            return name1[0];
+        }
+    }
+}
+
+
 for(let select of dropdowns){
     for (currCode in countryList){
-        let newOption = document.createElement("option");
-        newOption.innerText = currCode;
-        newOption.value = currCode;
+        let newOption = document.createElement("option");                    
+        newOption.innerText = currCode + "- " + getname(currCode);
         if(select.name === "from" && currCode === "USD"){
             newOption.selected = "selected";
         }
@@ -19,14 +28,18 @@ for(let select of dropdowns){
         select.append(newOption);
     }
     select.addEventListener("change",(evt) => {
-        updateFlag(evt.target);
+        let spec = evt.target;
+        updateFlag(spec);
     })
 }
 
 
 const updateFlag = (element) => {
-    let currCode = element.value;
+    let currCode1 = element.value.split("-");
+    let currCode = currCode1[0];
+    console.log(currCode);
     let countryCode = countryList[currCode];
+    console.log(countryList[1]);
     let newSource = `https://flagsapi.com/${countryCode}/flat/64.png`;
     let img = element.parentElement.querySelector("img");
     img.src=newSource;
@@ -45,7 +58,8 @@ function checkcurrfrom(){
     let txt1 = "";
     for(let curr in currList){
         for(let x=0;x<=curr.length;x++){
-            if(fromCurr.value === curr){
+            let fromCurr1 = fromCurr.value.split("-")
+            if(fromCurr1[0] === curr){
                 console.log(curr);
                 txt1 = currList[curr];
             }   
@@ -60,7 +74,8 @@ function checkcurr(){
 let txt = "";
 for(let curr in currList){
     for(let x=0;x<=curr.length;x++){
-        if(toCurr.value === curr){
+        let toCurr1 = toCurr.value.split("-");
+        if(toCurr1[0] === curr){
             console.log(curr);
             txt = currList[curr];
         }   
@@ -70,12 +85,11 @@ console.log(txt);
 return txt;
 }
 
-    const URL = BASE_URL;
-    let response = await fetch(URL);
     let data = checkcurrfrom();
     let rate = checkcurr();
     let finalAmt = data * rate;
     console.log(finalAmt);
-
-    msg.innerText = `${amtVal} ${fromCurr.value} = ${finalAmt} ${toCurr.value}`;
+    let fromCurr1 = fromCurr.value.split("-");
+    let toCurr1 = toCurr.value.split("-");
+    msg.innerText = `${amtVal} ${fromCurr1[0]} = ${finalAmt} ${toCurr1[0]}`;
 })
