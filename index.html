@@ -11,34 +11,44 @@
     <div class="container">
         <div class="head">
             <h2>Currency Converter</h2>
-            <button class="button"><i class="fa-solid fa-moon"></i></button>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                <i class="fa-solid fa-moon"></i>
+            </button>
         </div>
-        <form>
+        <form id="converter-form">
             <div class="amount">
                 <p>Enter Amount</p>
-                <input value="100" type="text">
+                <input id="amount-input" value="100" type="number" min="0" step="any" placeholder="Enter amount to convert">
             </div>
             <div class="dropdown">
                 <div class="from">
                     <p>From</p>
-                        <div class="select-container">
-                            <img src="https://flagsapi.com/US/flat/64.png" alt="notfound">
-                            <select name="from"></select>
-                        </div>
+                    <div class="select-container">
+                        <img src="https://flagsapi.com/US/flat/64.png" alt="US flag">
+                        <select name="from" id="from-currency"></select>
+                    </div>
                 </div>
-                <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                <div class="tooltip">
+                    <div class="swap-icon" id="swap-button">
+                        <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                    </div>
+                    <span class="tooltiptext">Swap currencies</span>
+                </div>
                 <div class="to">
                     <p>To</p>
-                        <div class="select-container">
-                            <img src="https://flagsapi.com/IN/flat/64.png" alt="notfound">
-                            <select name="to"></select>
-                        </div>
+                    <div class="select-container">
+                        <img src="https://flagsapi.com/IN/flat/64.png" alt="IN flag">
+                        <select name="to" id="to-currency"></select>
+                    </div>
                 </div>
             </div>
-            <div class="msg">1USD = 80INR</div>
-            <button>Get Exchange Rate</button>
+            <div class="msg" id="exchange-rate">1 USD = 80 INR</div>
+            <button type="submit" class="convert-btn" id="convert-button">
+                <span id="loading-indicator" style="display: none;" class="loading"></span>
+                <span>Get Exchange Rate</span>
+            </button>
             <div class="madeby">
-                <h2>Made by <a href="https://github.com/AtulmishraIT/Currency-Converter">Atul Mishra</a> </h2>
+                <h2>Made by <a href="https://github.com/AtulmishraIT/Currency-Converter" target="_blank">Atul Mishra</a></h2>
             </div>
         </form>
     </div>
@@ -46,6 +56,5 @@
     <script src="currency.js"></script>
     <script src="codes.js"></script>
     <script src="converter.js"></script>
-    <script src="apperance.js"></script>
 </body>
 </html>
